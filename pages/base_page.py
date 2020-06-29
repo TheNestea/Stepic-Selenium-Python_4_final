@@ -3,6 +3,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from .locators import BasePageLocators
+from .locators import MainPageLocators
 
 
 class BasePage():
@@ -14,6 +15,11 @@ class BasePage():
 
     def open(self):
         self.browser.get(self.url)
+
+    def go_to_basket_page(self):
+        busket_button = self.browser.find_element(*MainPageLocators.BASKET_BUTTON)
+        assert busket_button.text == "Посмотреть корзину", "Неверное название кнопки корзины"
+        busket_button.click()
 
 
     def go_to_login_page(self):
