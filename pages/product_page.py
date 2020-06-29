@@ -1,7 +1,8 @@
 import math
 import time
 from .base_page import BasePage
-from .locators import MainPageLocators
+from .locators import BasePageLocators
+#from .locators import MainPageLocators
 from .locators import ProductPageLocators
 from .login_page import LoginPage
 from selenium.webdriver.common.by import By
@@ -36,7 +37,7 @@ class ProductPage(BasePage):
         #time.sleep(15000)
 
     def should_not_be_success_message(self):
-        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+        assert self.is_not_element_present(*ProductPageLocators.ALERT_PRODUCT_WAS_ADDED), "Success message is presented, but should not be"
 
-    def element_should_disappeared(self):
-        assert self.is_disappeared(*ProductPageLocators.ADD_TO_BASKET_BUTTON), "Button is not disappeared, but should be"
+    def success_message_should_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.ALERT_PRODUCT_WAS_ADDED), "Button is not disappeared, but should be"
