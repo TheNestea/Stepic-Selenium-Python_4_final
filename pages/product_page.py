@@ -1,9 +1,6 @@
 import math
 from .base_page import BasePage
-from .locators import BasePageLocators
 from .locators import ProductPageLocators
-from .login_page import LoginPage
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoAlertPresentException
 
 
@@ -22,7 +19,6 @@ class ProductPage(BasePage):
         except NoAlertPresentException:
             print("No second alert presented")
 
-
     def add_product_to_basket(self):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         add_to_basket_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
@@ -31,10 +27,8 @@ class ProductPage(BasePage):
         product_name_was_added = self.browser.find_element(*ProductPageLocators.ALERT_PRODUCT_WAS_ADDED).text
         assert product_name == product_name_was_added, "Incorrect product names in basket, AR = " + product_name_was_added + ", ER = " + product_name
 
-
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.ALERT_PRODUCT_WAS_ADDED), "Success message is presented, but should not be"
-
 
     def success_message_should_disappeared(self):
         assert self.is_disappeared(*ProductPageLocators.ALERT_PRODUCT_WAS_ADDED), "Button is not disappeared, but should be"
