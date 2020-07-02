@@ -17,14 +17,17 @@ class BasePage():
         self.browser.get(self.url)
 
     def go_to_basket_page(self):
-        busket_button = self.browser.find_element(*MainPageLocators.BASKET_BUTTON)
-        assert busket_button.text == "Посмотреть корзину", "Неверное название кнопки корзины"
-        busket_button.click()
+        basket_button = self.browser.find_element(*MainPageLocators.BASKET_BUTTON)
+        basket_button.click()
 
 
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
+
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"
 
 
     def should_be_login_link(self):
